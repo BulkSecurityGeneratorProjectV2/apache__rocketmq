@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -323,7 +324,7 @@ public class TlsTest {
 
         try {
             String[] segments = fileName.split("\\.");
-            File f = File.createTempFile(UUID.randomUUID().toString(), segments[1]);
+            File f = Files.createTempFile(UUID.randomUUID().toString(), segments[1]).toFile();
             f.deleteOnExit();
 
             try (BufferedInputStream bis = new BufferedInputStream(stream);

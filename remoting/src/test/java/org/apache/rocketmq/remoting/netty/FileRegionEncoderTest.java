@@ -25,6 +25,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Random;
 import java.util.UUID;
 import org.junit.Assert;
@@ -41,7 +42,7 @@ public class FileRegionEncoderTest {
     public void testEncode() throws IOException {
         FileRegionEncoder fileRegionEncoder = new FileRegionEncoder();
         EmbeddedChannel channel = new EmbeddedChannel(fileRegionEncoder);
-        File file = File.createTempFile(UUID.randomUUID().toString(), ".data");
+        File file = Files.createTempFile(UUID.randomUUID().toString(), ".data").toFile();
         file.deleteOnExit();
         Random random = new Random(System.currentTimeMillis());
         int dataLength = 1 << 10;
